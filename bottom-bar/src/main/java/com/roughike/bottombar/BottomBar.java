@@ -366,12 +366,15 @@ public class BottomBar extends FrameLayout implements View.OnClickListener, View
     /**
      * Set a listener that gets fired when the selected tab changes.
      *
+     * Note: If listener is set after items are added to the BottomBar, onTabSelected
+     * will be immediately called for the currently selected tab
+     *
      * @param listener a listener for monitoring changes in tab selection.
      */
-    public void setOnTabClickListener(OnTabClickListener listener) {
+    public void setOnTabClickListener(@Nullable OnTabClickListener listener) {
         mListener = listener;
 
-        if (mItems != null && mItems.length > 0) {
+        if (mListener != null && mItems != null && mItems.length > 0) {
             listener.onTabSelected(mCurrentTabPosition);
         }
     }
